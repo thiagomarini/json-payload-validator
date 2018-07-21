@@ -30,8 +30,10 @@ class TestValidator(TestCase):
             ]
         }
         error = validate({'name': 5}, schema)
-        expected = "Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}"
-        self.assertEqual(expected, error)
+        self.assertTrue("Validation of property 'name' failed:" in error)
+        self.assertTrue("'minLength': 2" in error)
+        self.assertTrue("'type': 'string'" in error)
+        self.assertTrue("'maxLength': 50" in error)
 
     def test_custom_message_being_returned(self):
         schema = {

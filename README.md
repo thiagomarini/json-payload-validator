@@ -1,6 +1,6 @@
 # Json Payload Validator
 
-Little package that formats validation error messages from [jsonschema](https://pypi.python.org/pypi/jsonschema).
+Little Python package that formats validation error messages from [jsonschema](https://pypi.python.org/pypi/jsonschema).
 You should use this package if you want a stand alone json validator decoupled from any framework.
 
 ### Reason of being
