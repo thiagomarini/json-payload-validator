@@ -13,16 +13,16 @@ setuptools.setup(
     keywords='json schema payload validation',
     url="https://github.com/thiagomarini/json-payload-validator",
     packages=setuptools.find_packages(),
-    classifiers=(
+    classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        'Topic :: JSON :: Validation',
-    ),
+        "Topic :: JSON :: Validation",
+    ],
     license='MIT',
     install_requires=[
-        'jsonschema',
+        "jsonschema",
     ],
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    test_suite="nose.collector",
+    tests_require=["nose"],
 )
