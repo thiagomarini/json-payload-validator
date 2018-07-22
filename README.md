@@ -40,8 +40,8 @@ payload = {'name': 'John Maus'}
 error = validate(payload, schema)
 
 if error is None:
-    print 'Validation passed :-)'
+    print('Validation passed :-)')
 else:
-    print error 
+    print(error)
     # Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}
 ```
