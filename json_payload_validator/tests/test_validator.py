@@ -3,7 +3,9 @@ from json_payload_validator import validate
 
 
 class TestValidator(TestCase):
-
+    """
+    To run the tests use: python setup.py test
+    """
     def test_required_properties_validation(self):
         schema = {
             'type': 'object',
