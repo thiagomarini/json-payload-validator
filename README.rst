@@ -19,8 +19,6 @@ Little Python package that formats validation error messages from `jsonschema
 <https://pypi.python.org/pypi/jsonschema>`_.
 You should use this package if you want a stand alone json validator decoupled from any framework.
 
-See on Pypi: https://pypi.org/project/json_payload_validator.
-
 Reason of being
 ---------------
 
@@ -39,6 +37,8 @@ How it works
 
 Usage
 -----
+
+``pip install json_payload_validator``
 
 **Successful validation example**
 
