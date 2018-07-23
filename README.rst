@@ -32,13 +32,13 @@ How it works
 3 simple rules:
 
 - If you don't send a required property in the payload you'll get the message ``'foo' is a required property``.
-- If validation fails the validation rule will be returned ``Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}``.
-- If you add ``message`` property in your validation rule its value will be returned instead of the rule ``Validation of property 'foo' failed: Custom error message``.
+- If validation fails the validation rule will be returned ``Validation of property 'foo' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}``.
+- If you add ``message`` property in a validation rule its value will be returned instead of the rule ``Validation of property 'foo' failed: Custom error message``.
 
 Usage
 -----
 
-To use, simply do:
+**Successful validation example**
 
 .. code-block:: python
 
@@ -54,13 +54,50 @@ To use, simply do:
         ]
     }
 
-    # example of validation
     payload = {'name': 'John Maus'}
 
     error = validate(payload, schema)
+    print(error) # None
 
-    if error is None:
-        print('Validation passed :-)')
-    else:
-        print(error)
-        # Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}
+**Validation failure example**
+
+.. code-block:: python
+
+    from json_payload_validator import validate
+
+    schema = {
+        'type': 'object',
+        'properties': {
+            'name': {'type': 'string', {'minLength': 2, 'type': 'string', 'maxLength': 50}},
+        },
+        'required': [
+            'name'
+        ]
+    }
+
+    payload = {'name': 555}
+
+    error = validate(payload, schema)
+    print(error) # Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}
+
+**Custom error message example**
+
+.. code-block:: python
+
+    from json_payload_validator import validate
+
+    schema = {
+        'type': 'object',
+        'properties': {
+            'name': {'type': 'string', 'message': 'Name must be a string'},
+        },
+        'required': [
+            'name'
+        ]
+    }
+
+    # example of validation
+    payload = {'name': 555}
+
+    error = validate(payload, schema)
+    print(error) # Validation of property 'name' failed: Name must be a string
