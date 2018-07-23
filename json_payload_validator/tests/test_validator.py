@@ -7,7 +7,7 @@ class TestValidator(TestCase):
     To run the tests use: python setup.py test
     """
 
-    simple_schema = {
+    flat_schema = {
         'type': 'object',
         'properties': {
             'name': {'type': 'string'},
@@ -18,7 +18,7 @@ class TestValidator(TestCase):
         ]
     }
 
-    simple_nested_schema = {
+    nested_schema = {
         'type': 'object',
         'required': ['name', 'age', 'club_name'],
         'properties': {
@@ -36,12 +36,12 @@ class TestValidator(TestCase):
     }
 
     def test_required_property_validation_with_empty_payload(self):
-        error = validate({}, self.simple_schema)
+        error = validate({}, self.flat_schema)
         expected = "'name' is a required property"
         self.assertEqual(expected, error)
 
     def test_required_property_validation_with_other_property_present(self):
-        error = validate({'name': 'John'}, self.simple_schema)
+        error = validate({'name': 'John'}, self.flat_schema)
         expected = "'surname' is a required property"
         self.assertEqual(expected, error)
 
@@ -53,12 +53,12 @@ class TestValidator(TestCase):
             'age': 27,
             'club_name': 'Clube Atletico Mineiro'
         }
-        error = validate(payload, self.simple_nested_schema)
+        error = validate(payload, self.nested_schema)
         expected = "'first_name' is a required property"
         self.assertEqual(expected, error)
 
     def test_return_of_validation_rule_in_flat_object(self):
-        error = validate({'name': 666, 'surname': 'Maus'}, self.simple_schema)
+        error = validate({'name': 666, 'surname': 'Maus'}, self.flat_schema)
         expected = "Validation of property 'name' failed: {'type': 'string'}"
         self.assertEqual(expected, error)
 
@@ -71,9 +71,11 @@ class TestValidator(TestCase):
             'age': 76,
             'club_name': 'Clube Atletico Mineiro'
         }
-        error = validate(payload, self.simple_nested_schema)
-        expected = "Validation of property 'first_name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}"
-        self.assertEqual(expected, error)
+        error = validate(payload, self.nested_schema)
+        self.assertTrue("Validation of property 'first_name' failed:" in error)
+        self.assertTrue("'minLength': 2" in error)
+        self.assertTrue("'type': 'string'" in error)
+        self.assertTrue("'maxLength': 50" in error)
 
     def test_return_of_custom_error_message_in_flat_object(self):
         schema = {
@@ -112,22 +114,25 @@ class TestValidator(TestCase):
                 'first_name': 666,
                 'last_name': 'Tardelli',
             },
-            'age': 76,
+            'age': 31,
             'club_name': 'Clube Atletico Mineiro'
         }
         error = validate(payload, schema)
         expected = "Validation of property 'first_name' failed: Hello World"
         self.assertEqual(expected, error)
 
-    def test_payload_passing_validation(self):
-        schema = {
-            'type': 'object',
-            'properties': {
-                'name': {'type': 'string', 'minLength': 2, 'maxLength': 50},
+    def test_flat_object_passing_validation(self):
+        error = validate({'name': 'John', 'surname': 'Maus'}, self.flat_schema)
+        self.assertEqual(None, error)
+
+    def test_nested_object_passing_validation(self):
+        payload = {
+            'name': {
+                'first_name': 'Diego',
+                'last_name': 'Tardelli',
             },
-            'required': [
-                'name'
-            ]
+            'age': 26,
+            'club_name': 'Clube Atletico Mineiro'
         }
-        error = validate({'name': 'John'}, schema)
+        error = validate(payload, self.nested_schema)
         self.assertEqual(None, error)
