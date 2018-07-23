@@ -61,7 +61,28 @@ Usage
     error = validate(payload, schema)
     print(error) # None
 
-**Validation failure example**
+**Required property example**
+
+.. code-block:: python
+
+    from json_payload_validator import validate
+
+    schema = {
+        'type': 'object',
+        'properties': {
+            'name': {'type': 'string'},
+        },
+        'required': [
+            'name'
+        ]
+    }
+
+    payload = {}
+
+    error = validate(payload, schema)
+    print(error) # 'name' is a required property
+
+**Validation rule failure example**
 
 .. code-block:: python
 
@@ -98,7 +119,6 @@ Usage
         ]
     }
 
-    # example of validation
     payload = {'name': 555}
 
     error = validate(payload, schema)
