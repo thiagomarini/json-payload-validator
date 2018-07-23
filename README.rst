@@ -1,7 +1,7 @@
 Json Payload Validator
 ======================
 
-|CircleCI| |PyPI version shields.io| |PyPI license| |PyPI pyversions|
+|CircleCI| |PyPI pyversions| |PyPI version shields.io| |PyPI license|
 
 .. |CircleCI| image:: https://circleci.com/gh/thiagomarini/json-payload-validator.svg?style=svg
     :target: https://circleci.com/gh/thiagomarini/json-payload-validator
@@ -18,6 +18,8 @@ Json Payload Validator
 Little Python package that formats validation error messages from `jsonschema
 <https://pypi.python.org/pypi/jsonschema>`_.
 You should use this package if you want a stand alone json validator decoupled from any framework.
+
+See on Pypi: https://pypi.org/project/json_payload_validator.
 
 Reason of being
 ---------------
