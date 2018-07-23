@@ -31,9 +31,9 @@ How it works
 
 3 simple rules:
 
-- If you don't send a required property in the payload you'll get the message ``All required properties must be present: foo, bar, baz``.
+- If you don't send a required property in the payload you'll get the message ``'foo' is a required property``.
 - If validation fails the validation rule will be returned ``Validation of property 'name' failed: {'minLength': 2, 'type': 'string', 'maxLength': 50}``.
-- If you add ``message`` property in your validation rule its value will be returned instead of the rule ``Validation of property 'foo' failed: Custom message will go in here``.
+- If you add ``message`` property in your validation rule its value will be returned instead of the rule ``Validation of property 'foo' failed: Custom error message``.
 
 Usage
 -----

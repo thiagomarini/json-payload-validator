@@ -8,7 +8,7 @@ def readme():
 
 setuptools.setup(
     name="json_payload_validator",
-    version="0.0.3",
+    version="0.1.0",
     author="Thiago Marini",
     description="JSON validator package based on jsonschema that returns nicer validation errors for end users",
     long_description=readme(),
